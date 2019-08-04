@@ -7,3 +7,10 @@ export const getSources = (category, language, country) => {
   .then(res => res.json())
   .catch(e => console.log(e));
 }
+
+export const getNewsFeed = (id) => {
+  const url = `${baseUrl}top-headlines?apiKey=${apiKey}&sources=${id}`;
+  return fetch(url)
+  .then(res => res.json())
+  .catch(e => console.warn(e));
+}

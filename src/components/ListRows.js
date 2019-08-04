@@ -7,17 +7,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const styles = EStyleSheet.create({
 
-  // $ffReg: 'Roboto-Regular',
-  // $ffBold: 'Roboto-Bold',
-  // $ffBlack: 'Roboto-Black',
-
-  
-  listContainer: {
-    padding: '1.5rem'
-  },
-  jobType: {
-    paddingBottom: '1.2rem'
-  },
   horizontalLine: {
     borderBottomWidth: '.1rem',
     borderBottomColor: '#C1C1C1'
@@ -29,41 +18,22 @@ const styles = EStyleSheet.create({
     width: '100%',
     justifyContent: 'space-between'
   },
-  iconContainer: {
-    width: '16%',
-    height: '4rem',
-    backgroundColor: '#E1E1E1',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '.5rem'
-  },
   arrowContainer: {
     paddingLeft: '2rem',
     paddingRight: '.5rem',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  iconTxtStyle: {
-    fontSize: '1rem',
-    color: '#808080'
-  },
-  jobContainer: {
+  listContainer: {
     flex: 1,
     marginLeft: '1.5rem',
     marginRight: '.5rem',
     justifyContent: 'center',
   },
-  jobTxtStyle: {
+  listTxtStyle: {
     fontSize: '1.3rem',
     color: '#808080'
   },
-  imageStyle: {
-    height: '100%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '.5rem'
-  }
 })
 
 class ListRows extends Component {
@@ -79,8 +49,8 @@ class ListRows extends Component {
           onPress={action}
           style={styles.rowContainer}
         >
-          <View style={styles.jobContainer}>
-            <Text style={styles.jobTxtStyle}>{name}</Text>
+          <View style={styles.listContainer}>
+            <Text style={styles.listTxtStyle}>{name}</Text>
             <Text>{description}</Text>
           </View>
           <View style={styles.arrowContainer}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -50,17 +50,25 @@ const styles = EStyleSheet.create({
 })
 
 export default class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
   }
 
   render() {
+    const { component } = this.props;
     return(
       <View style={styles.container}>
-        <View style={styles.menuContainer}>
-          <Icon name='menu' size={30} color='#A1A1A1' />
-        </View>
+        <TouchableOpacity 
+          onPress={component === 'NewsFeed' ? () => Actions.pop() : () => alert('asdlfk')}
+          style={styles.menuContainer}
+        >
+          {
+            component === 'NewsFeed' ?
+            <Icon name='arrow-left' size={30} color='#A1A1A1' /> :
+            <Icon name='menu' size={30} color='#A1A1A1' />
+          }
+        </TouchableOpacity>
         <View style={styles.searchContainer}>
           <TouchableWithoutFeedback
             onPress={() => Actions.home()}

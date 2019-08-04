@@ -20,10 +20,8 @@ import { createStore } from 'redux';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import reducers from './reducers';
-import Header from './components/Header';
 import Home from './components/Home';
-import Dummy from './components/Dummy';
-import Categories from './components/Categories';
+import NewsFeed from './components/NewsFeed'
 
 
 
@@ -36,9 +34,7 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducers)}>
         <StatusBar barStyle="light-content"/>
-        {/* <Header /> */}
-        <Categories />
-        {/* <Router>
+        <Router>
           <Scene key="root">
             <Scene
               key="home"
@@ -46,12 +42,12 @@ export default class App extends Component {
               hideNavBar
             />
             <Scene
-              key="dummy"
-              component={Dummy}
+              key="newsFeed"
+              component={NewsFeed}
               hideNavBar
             />
           </Scene>
-        </Router> */}
+        </Router>
       </Provider>
     );
   }

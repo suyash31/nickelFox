@@ -6,56 +6,96 @@ import Dummy from './Dummy';
 import Header from './Header';
 
 const styles = EStyleSheet.create({
+  $red: '#cc0000',
+  $grey: '#A1A1A1',
+
   underLine: {
-    backgroundColor: 'red'
+    backgroundColor: '$red'
   },
-  tabsContainerStyle: {
-    borderWidth: 2,
-    borderColor: 'red',
+  tabStyle: {
+    backgroundColor: '#FFF',
   },
-  scrollableTab: {
-    backgroundColor: '#000',
-    borderColor: 'blue',
-    borderWidth: 1,
+  textStyle: {
+    color: '$grey',
+    fontWeight: 'bold',
+  },
+  activeTextStyle: {
+    color: '$red',
+    fontWeight: 'bold',
   }
 })
 export default class Categories extends Component {
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <Container>
         <Header hasTabs/>
         <Tabs
           tabBarUnderlineStyle={styles.underLine}
-          renderTabBar={() => {  
+          renderTabBar={() =>{
             return(
-              <ScrollableTab 
-                // underlineStyle = {styles.underLine}
-                tabsContainerStyle = {styles.tabsContainerStyle}
-                style = {styles.scrollableTab}
-              />
+              <ScrollableTab />
             )
           }}
         >
-          <Tab heading="General" tabBarBackgroundColor={'#FFF'}>
-            <Home />
+          <Tab heading="General"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'general'}/>
           </Tab>
-          <Tab heading="Business">
-            <Dummy />
+          <Tab heading="Business"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'business'}/>
           </Tab>
-          <Tab heading="Entertainment">
-            <Home />
+          <Tab heading="Entertainment"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'entertainment'}/>
           </Tab>
-          <Tab heading="Health">
-            <Dummy />
+          <Tab heading="Health"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'health'}/>
           </Tab>
-          <Tab heading="Science">
-            <Home />
+          <Tab heading="Science"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'science'}/>
           </Tab>
-          <Tab heading="Sports">
-            <Home />
+          <Tab heading="Sports"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'sports'}/>
           </Tab>
-          <Tab heading="Technology">
-            <Home />
+          <Tab heading="Technology"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.tabStyle}
+            activeTextStyle={styles.activeTextStyle}
+          >
+            <Home category={'technology'}/>
           </Tab>
         </Tabs>
       </Container>

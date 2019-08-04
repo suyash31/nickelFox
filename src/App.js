@@ -15,8 +15,11 @@ import {
 } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import reducers from './reducers';
 import Header from './components/Header';
 import Home from './components/Home';
 import Dummy from './components/Dummy';
@@ -31,7 +34,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Fragment>
+      <Provider store={createStore(reducers)}>
         <StatusBar barStyle="light-content"/>
         {/* <Header /> */}
         <Categories />
@@ -49,7 +52,7 @@ export default class App extends Component {
             />
           </Scene>
         </Router> */}
-      </Fragment>
+      </Provider>
     );
   }
 };

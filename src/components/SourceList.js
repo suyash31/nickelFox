@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   FlatList,
-  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -18,18 +16,17 @@ import ListRows from './ListRows';
 const styles = EStyleSheet.create({
   $rem: rem,
   mainContainer: {
-    padding: '1.5rem',
+    // padding: '1.5rem',
   },
   cardContainer: {
     width: '100%',
     borderWidth: 0,
     marginBottom: '1rem',
-    borderRadius: '.6rem',
     shadowColor: '#808080',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.8,
     shadowRadius: 1,
-    elevation: 3,
+    elevation: '.05rem',
   },
   headingContainer: {
     paddingTop: '.5rem',

@@ -4,7 +4,6 @@ import {
   Text,
   FlatList
 } from 'react-native';
-import { Container } from 'native-base';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from './Header';
@@ -14,19 +13,22 @@ import * as API from '../api';
 const styles = EStyleSheet.create({
   outerContainer: {
     flex: 1,
-    paddingBottom: '13rem',
+    paddingBottom: '12.5rem',
     backgroundColor: '#FFF'
   },
   mainContainer: {
-    padding: '1.5rem',
     paddingTop: '.5rem',
   },
   topStory: {
+    paddingLeft: '1.5rem',
     fontWeight: 'bold',
     fontSize: '1.2rem',
     color: '#3D3D3D'
   },
   sourceContainer: {
+    paddingTop: '1.5rem',
+    paddingLeft: '1.5rem',
+    paddingBottom: '.5rem',
     flexDirection: 'row',
     alignItems: 'center',
     paddingTop: '.5rem'
@@ -35,7 +37,15 @@ const styles = EStyleSheet.create({
     paddingLeft: '.5rem',
     fontSize: '1rem',
     fontWeight: 'bold',
-    color: '#A1A1A1'
+    color: '#808080'
+  },
+  cardContainer: {
+    borderBottomColor: '#3D3D3D',
+    shadowColor: '#808080',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    elevation: '.05rem',
   }
 })
 
@@ -56,22 +66,22 @@ export default class NewsFeed extends Component {
     API.getNewsFeed(id)
     .then(res => {
       if (res.status == 'ok') {
-        this.setState({ newsFeed: res.articles}, () => {
-          console.warn(this.state.newsFeed)
-        })
+        this.setState({ newsFeed: res.articles})
       }
     })
   }
 
   renderCard = ({item}) => {
     return (
-      <Card
-        headline = {item.title}
-        url = {item.url}
-        urlToImage = {item.urlToImage}
-        publishedAt = {item.publishedAt}
-        author = {item.author}
-      />
+      <View style={styles.cardContainer}>
+        <Card
+          headline = {item.title}
+          url = {item.url}
+          urlToImage = {item.urlToImage}
+          publishedAt = {item.publishedAt}
+          author = {item.author}
+        />
+      </View>
     )
   }
 
@@ -84,7 +94,7 @@ export default class NewsFeed extends Component {
         <View style={styles.mainContainer}>
           <Text style={styles.topStory}>Top Stories</Text>
           <View style={styles.sourceContainer}>
-            <Icon name={'newspaper'} size={30} color={'#A1A1A1'} />
+            <Icon name={'newspaper'} size={30} color={'#808080'} />
             <Text style={styles.name}>{sourceName}</Text>
           </View>
           <View style={styles.newsFeedContainer}>

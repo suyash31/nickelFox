@@ -3,16 +3,17 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity
 } from 'react-native';
-import { Container } from 'native-base';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Header from './Header';
-import * as API from '../api';
+import moment from 'moment';
+import { Actions } from 'react-native-router-flux';
 
 const styles = EStyleSheet.create({
   cardContainer: {
+    padding: '1.5rem',
     paddingTop: '1rem',
+    paddingBottom: '1rem',
     width: '100%',
   },
   bottomStrip: {
@@ -20,14 +21,24 @@ const styles = EStyleSheet.create({
     justifyContent: 'space-between'
   },
   imageContainer: {
-    paddingTop: '.5rem',
-    paddingBottom: '.2rem',
+    paddingTop: '1rem',
+    paddingBottom: '.5rem',
   },
   imageStyle: {
     width: '100%',
     height: '10rem',
-    borderRadius: '.3rem'
-
+    borderRadius: '.3rem',
+  },
+  headLineStyle: {
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
+    color: '#000'
+  },
+  headlineContainer: {
+    paddingTop: '.2rem'
+  },
+  textStyle: {
+    fontWeight: 'bold',
   }
 })
 const noImage = 'http://thetechtemple.com/wp-content/themes/TechNews/images/img_not_available.jpg';
@@ -39,21 +50,25 @@ export default class Card extends Component {
   render() {
     const { headline, url, urlToImage, publishedAt, author } = this.props;
     return (
-      <View style={styles.cardContainer}>
+      <TouchableOpacity
+        onPress={() => Actions.webView({url})}
+        style={styles.cardContainer}
+      >
         <View style={styles.headlineContainer}>
-          <Text>{headline}</Text>
+          <Text style={styles.headLineStyle}>{headline}</Text>
         </View>
         <View style={styles.imageContainer}>
           <Image
             source = {{ uri: urlToImage == null ? noImage : urlToImage }}
+            resizeMode = 'cover'
             style={styles.imageStyle}
           />
         </View>
         <View style={styles.bottomStrip}>
-          <Text>{publishedAt}</Text>
-          <Text>{author}</Text>
+          <Text style={styles.textStyle}>{moment(publishedAt).format('MMMM Do YYYY')}</Text>
+          <Text style={styles.textStyle}>{author}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

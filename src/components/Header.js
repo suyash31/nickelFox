@@ -60,29 +60,33 @@ export default class Header extends Component {
     return(
       <View style={styles.container}>
         <TouchableOpacity 
-          onPress={component === 'NewsFeed' ? () => Actions.pop() : () => alert('asdlfk')}
+          onPress={component === 'Home' ? () => alert('asdlfk') : () => Actions.pop()}
           style={styles.menuContainer}
         >
           {
-            component === 'NewsFeed' ?
-            <Icon name='arrow-left' size={30} color='#A1A1A1' /> :
-            <Icon name='menu' size={30} color='#A1A1A1' />
+            component === 'Home' ?
+            <Icon name='menu' size={30} color='#A1A1A1' /> :
+            <Icon name='arrow-left' size={30} color='#A1A1A1' />
           }
         </TouchableOpacity>
-        <View style={styles.searchContainer}>
-          <TouchableWithoutFeedback
-            onPress={() => Actions.home()}
-          >
-            <View style={styles.searchBox}>
-              <View style={styles.justify}>
-                <Text style={styles.placeholder}> Search News ...</Text>
+        {
+          component !== 'WebView' ?
+          <View style={styles.searchContainer}>
+            <TouchableWithoutFeedback
+              onPress={() => {}}
+            >
+              <View style={styles.searchBox}>
+                <View style={styles.justify}>
+                  <Text style={styles.placeholder}> Search News ...</Text>
+                </View>
+                <View style={styles.justify}>
+                  <Icon name='magnify' size={25} color='#A1A1A1' />
+                </View>
               </View>
-              <View style={styles.justify}>
-                <Icon name='magnify' size={25} color='#A1A1A1' />
-              </View>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+            </TouchableWithoutFeedback>
+          </View> :
+          <View style={styles.searchContainer} />
+        }
       </View>
     );
   }

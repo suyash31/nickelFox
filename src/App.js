@@ -21,7 +21,8 @@ import { createStore } from 'redux';
 
 import reducers from './reducers';
 import Home from './components/Home';
-import NewsFeed from './components/NewsFeed'
+import NewsFeed from './components/NewsFeed';
+import WebView from './components/WebView';
 
 
 
@@ -44,6 +45,11 @@ export default class App extends Component {
             <Scene
               key="newsFeed"
               component={NewsFeed}
+              hideNavBar
+            />
+            <Scene
+              key="webView"
+              component={WebView}
               hideNavBar
             />
           </Scene>

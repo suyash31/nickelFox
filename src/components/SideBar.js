@@ -5,6 +5,8 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import ListRows from '../components/ListRows';
+
 const styles = EStyleSheet.create({
   sidebarContainer: {
     flex: 1,
@@ -40,6 +42,14 @@ export default class SideBar extends Component {
             <Text style={styles.logoStyle}>News App</Text>
           </View>
         </View>
+        <ListRows
+          name = {'Language'}
+          description = {'English'}
+        />
+        <ListRows
+          name = {'Country'}
+          description = {'US'}
+        />
       </View>
     )
   }

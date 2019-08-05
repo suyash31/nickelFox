@@ -52,15 +52,18 @@ const styles = EStyleSheet.create({
 export default class Header extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      status: 'false'
+    }
   }
 
   render() {
-    const { component } = this.props;
+    const { status } = this.state;
+    const { component, manageDrawer } = this.props;
     return(
       <View style={styles.container}>
         <TouchableOpacity 
-          onPress={component === 'Home' ? () => alert('asdlfk') : () => Actions.pop()}
+          onPress={component === 'Home' ? () => manageDrawer(status) : () => Actions.pop()}
           style={styles.menuContainer}
         >
           {

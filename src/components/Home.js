@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
+import { Container, Tab, Tabs, ScrollableTab, Drawer } from 'native-base';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import SourceList from './SourceList';
 import Header from './Header';
+import SideBar from './SideBar';
 
 const styles = EStyleSheet.create({
   $red: '#cc0000',
@@ -29,10 +30,27 @@ export default class Home extends Component {
     super();
   }
 
+  manageDrawer = (s) => {
+    // alert(s)
+    this.openDrawer();
+  }
+
+  closeDrawer() {
+    this._drawer._root.close()
+  };
+
+  openDrawer() {
+    this._drawer._root.open()
+  };
+
   render() {
     return (
+      <Drawer ref={(ref) => { this._drawer = ref; }}
+        content={<SideBar navigator={this.navigator} />}
+        onClose={() => this.closeDrawer()}
+      >
       <Container>
-        <Header hasTabs component={'Home'}/>
+        <Header hasTabs component={'Home'} manageDrawer={this.manageDrawer}/>
         <Tabs
           tabBarUnderlineStyle={styles.underLine}
           renderTabBar={() =>{
@@ -99,6 +117,7 @@ export default class Home extends Component {
           </Tab>
         </Tabs>
       </Container>
+      </Drawer>
     );
   }
 }

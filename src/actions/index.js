@@ -5,3 +5,17 @@ export const saveSourceList = (type, payload) => {
 		payload: payload,
 	}
 }
+
+export const saveCountryCode = (data) => {
+	return {
+		type: 'country',
+		payload: data,
+	}
+}
+
+export const saveLanguageCode = (data) => {
+	return {
+		type: 'language',
+		payload: data
+	}
+}

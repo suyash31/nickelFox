@@ -42,7 +42,7 @@ export default class SideBar extends Component {
   }
 
   componentDidMount = () => {
-    this.getLanguage()
+    this.getLanguage();
     this.getCountry();
   }
 

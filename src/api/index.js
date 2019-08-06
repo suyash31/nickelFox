@@ -12,5 +12,5 @@ export const getNewsFeed = (id) => {
   const url = `${baseUrl}top-headlines?apiKey=${apiKey}&sources=${id}`;
   return fetch(url)
   .then(res => res.json())
-  .catch(e => console.warn(e));
+  .catch(e => console.log(e));
 }

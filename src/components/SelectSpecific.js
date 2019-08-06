@@ -6,12 +6,14 @@ import {
 } from 'react-native';
 import { Button } from 'native-base';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { connect } from 'react-redux';
 
 import languageCodeMapping from '../utility/languageCodeMapping';
 import countryCodeMapping from '../utility/countryCodeMapping';
 import ListRows from '../components/ListRows';
 import { Actions } from 'react-native-router-flux';
 import Application from '../app/config';
+import * as actions from '../actions';
 
 const styles = EStyleSheet.create({
   outerContainer: {
@@ -36,14 +38,16 @@ const styles = EStyleSheet.create({
 })
 const languages = ['ar', 'de', 'en', 'es', 'fr', 'he', 'it', 'nl', 'no', 'pt', 'ru', 'se', 'zh'];
 
-const countryCode = [
+const countries = [
   'ae', 'ar', 'at', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn', 'co', 'cu', 'cz', 'de',
   'eg', 'fr', 'gb', 'gr', 'hk', 'hu', 'id', 'ie', 'il', 'in', 'it', 'jp', 'kr', 'lt',
   'lv', 'ma', 'mx', 'my', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt', 'ro', 'ru',
   'sa', 'se', 'sg', 'si', 'sk', 'th', 'tr', 'tw', 'ua', 'us', 've', 'za'
 ]
 
-export default class SelectSpecific extends Component {
+let langCode = [];
+let countryCode = [];
+class SelectSpecific extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -71,8 +75,18 @@ export default class SelectSpecific extends Component {
     const { language, countryName } = this.state;
     if (screen === 'Language') {
       Application.setLanguage({language});
+      langCode = Object.keys(languageCodeMapping).filter((key) => {
+        return languageCodeMapping[key] == language
+      })
+      this.setState({langCode: langCode[0]})
+      this.props.saveLanguageCode(langCode[0]);
     } else {
       Application.setCountry({country: countryName });
+      countryCode = Object.keys(countryCodeMapping).filter((key) => {
+        return countryCodeMapping[key] == countryName
+      })
+      this.setState({countryCode: countryCode[0]})
+      this.props.saveCountryCode(countryCode[0]);
     }
     Actions.home();
   }
@@ -91,7 +105,7 @@ export default class SelectSpecific extends Component {
   }
 
   renderCountryList = () => {
-    return countryCode.map((country) => {
+    return countries.map((country) => {
       return (
         <ListRows
           component = {'SelectSpecific'}
@@ -129,3 +143,5 @@ export default class SelectSpecific extends Component {
     )
   }
 }
+
+export default connect(null, actions)(SelectSpecific)

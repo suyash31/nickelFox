@@ -24,6 +24,7 @@ import Home from './components/Home';
 import NewsFeed from './components/NewsFeed';
 import WebView from './components/WebView';
 import SelectSpecific from './components/SelectSpecific';
+import Splash from './components/Splash';
 
 
 
@@ -38,6 +39,11 @@ export default class App extends Component {
         <StatusBar barStyle="light-content"/>
         <Router>
           <Scene key="root">
+            <Scene
+              key="splash"
+              component={Splash}
+              hideNavBar
+            />
             <Scene
               key="home"
               component={Home}

@@ -65,7 +65,7 @@ export default class Home extends Component {
             activeTabStyle={styles.tabStyle}
             activeTextStyle={styles.activeTextStyle}
           >
-            <SourceList category={'general'}/>
+            <SourceList category={'general'} />
           </Tab>
           <Tab heading="Business"
             tabStyle={styles.tabStyle}
@@ -73,7 +73,7 @@ export default class Home extends Component {
             activeTabStyle={styles.tabStyle}
             activeTextStyle={styles.activeTextStyle}
           >
-            <SourceList category={'business'}/>
+            <SourceList category={'business'} />
           </Tab>
           <Tab heading="Entertainment"
             tabStyle={styles.tabStyle}
@@ -89,7 +89,7 @@ export default class Home extends Component {
             activeTabStyle={styles.tabStyle}
             activeTextStyle={styles.activeTextStyle}
           >
-            <SourceList category={'health'}/>
+            <SourceList category={'health'} />
           </Tab>
           <Tab heading="Science"
             tabStyle={styles.tabStyle}
@@ -97,7 +97,7 @@ export default class Home extends Component {
             activeTabStyle={styles.tabStyle}
             activeTextStyle={styles.activeTextStyle}
           >
-            <SourceList category={'science'}/>
+            <SourceList category={'science'} />
           </Tab>
           <Tab heading="Sports"
             tabStyle={styles.tabStyle}
@@ -105,7 +105,7 @@ export default class Home extends Component {
             activeTabStyle={styles.tabStyle}
             activeTextStyle={styles.activeTextStyle}
           >
-            <SourceList category={'sports'}/>
+            <SourceList category={'sports'} />
           </Tab>
           <Tab heading="Technology"
             tabStyle={styles.tabStyle}
@@ -113,7 +113,7 @@ export default class Home extends Component {
             activeTabStyle={styles.tabStyle}
             activeTextStyle={styles.activeTextStyle}
           >
-            <SourceList category={'technology'}/>
+            <SourceList category={'technology'} />
           </Tab>
         </Tabs>
       </Container>

@@ -11,8 +11,8 @@ export default {
   },
 
   async getLanguage() {
-    const language = await AsyncStorage.getItem('language');
-    if (language == '') {
+    let language = await AsyncStorage.getItem('language');
+    if (!language) {
       language = 'English'
     }
     return language;
@@ -27,9 +27,9 @@ export default {
   },
 
   async getCountry() {
-    const country = await AsyncStorage.getItem('country');
-    if (country == '') {
-      country = 'United States'
+    let country = await AsyncStorage.getItem('country');
+    if (!country) {
+      country = 'united states'
     }
     return country;
   },

@@ -10,6 +10,9 @@ import { Actions } from 'react-native-router-flux';
 import * as API from '../api';
 import * as actions from '../actions';
 import ListRows from './ListRows';
+import Application from '../app/config';
+import languageCodeMapping from '../utility/languageCodeMapping';
+import countryCodeMapping from '../utility/countryCodeMapping';
 
 const styles = EStyleSheet.create({
   mainContainer: {
@@ -39,17 +42,24 @@ const styles = EStyleSheet.create({
   }
 })
 
+let langCode = [];
+let countryCode = [];
+
 class SourceList extends Component {
   constructor(props) {
     super(props);
-
+    
+    this.state = {
+      language: '',
+      country: '',
+    }
     this.getSources();
   }
 
   getSources = () => {
-    const { category, saveSourceList } = this.props;
+    const { category, saveSourceList, codes } = this.props;
     
-    API.getSources(category, language = 'en', country = 'us')
+    API.getSources(category, langCode = codes.langCode, countryCode = codes.countryCode)
     .then(res => {
       if (res.status == 'ok') {
         saveSourceList(category, res.sources)

@@ -55,7 +55,6 @@ export default class NewsFeed extends Component {
     super(props);
     this.state = {
       newsFeed: [],
-      loading: false,
     }
   }
 
@@ -64,12 +63,13 @@ export default class NewsFeed extends Component {
   }
 
   getNewsFeed = () => {
-    this.setState({ loading: true })
     const { id } = this.props;
     API.getNewsFeed(id)
     .then(res => {
       if (res.status == 'ok') {
-        this.setState({ newsFeed: res.articles, loading: false})
+        this.setState({ newsFeed: res.articles})
+      }  else {
+        alert('Something went wrong...')
       }
     })
   }

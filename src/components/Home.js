@@ -31,7 +31,6 @@ export default class Home extends Component {
   }
 
   manageDrawer = (s) => {
-    // alert(s)
     this.openDrawer();
   }
 

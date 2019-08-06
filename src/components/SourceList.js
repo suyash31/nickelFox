@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Actions } from 'react-native-router-flux';
+import PTRView from 'react-native-pull-to-refresh';
 
 import * as API from '../api';
 import * as actions from '../actions';
@@ -46,24 +47,25 @@ class SourceList extends Component {
     this.state = {
       language: '',
       country: '',
-      loading: false,
     }
     this.getSources();
   }
 
   getSources = () => {
-    this.setState({ loading: true })
     const { category, saveSourceList, codes } = this.props;
     
     API.getSources(category, langCode = codes.langCode, countryCode = codes.countryCode)
     .then(res => {
       if (res.status == 'ok') {
         saveSourceList(category, res.sources)
-        this.setState({ loading: false })
       } else {
         alert('Something went wrong...')
       }
     })
+  }
+
+  _refresh = () => {
+    this.getSources();
   }
 
   renderCard = ({item}) => {
@@ -78,24 +80,16 @@ class SourceList extends Component {
   }
 
   render() {
-    const { loading } = this.state;
     const { category, sources } = this.props;
 
-    if (loading) {
-      return 
-    }
     return (
-      <View>
-        {
-          loading ?
-          <Loader /> :
-          <FlatList
-            data={sources[category]}
-            renderItem={({item}) => this.renderCard({item})}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        }
-      </View>
+      <PTRView onRefresh={this._refresh} >
+        <FlatList
+          data={sources[category]}
+          renderItem={({item}) => this.renderCard({item})}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </PTRView>
     );
   }
 }

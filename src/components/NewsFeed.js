@@ -6,10 +6,10 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PTRView from 'react-native-pull-to-refresh';
 import Header from './Header';
 import Card from './Card';
 import * as API from '../api';
-import Loader from './Loader';
 
 const styles = EStyleSheet.create({
   outerContainer: {
@@ -74,6 +74,10 @@ export default class NewsFeed extends Component {
     })
   }
 
+  _refresh = () => {
+    this.getNewsFeed();
+  }
+
   renderCard = ({item}) => {
     return (
       <View style={styles.cardContainer}>
@@ -100,11 +104,13 @@ export default class NewsFeed extends Component {
             <Icon name={'newspaper'} size={30} color={'#808080'} />
             <Text style={styles.name}>{sourceName}</Text>
           </View>
-          <FlatList
-            data={newsFeed}
-            renderItem={({item}) => this.renderCard({item})}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          <PTRView onRefresh={this._refresh} >
+            <FlatList
+              data={newsFeed}
+              renderItem={({item}) => this.renderCard({item})}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </PTRView>
         </View>
       </View>
     );

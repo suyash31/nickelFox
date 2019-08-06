@@ -9,12 +9,9 @@ import { Actions } from 'react-native-router-flux';
 
 import * as API from '../api';
 import * as actions from '../actions';
-import rem from '../app/scale';
 import ListRows from './ListRows';
 
-
 const styles = EStyleSheet.create({
-  $rem: rem,
   mainContainer: {
     // padding: '1.5rem',
   },

@@ -9,10 +9,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
 
-import rem from '../app/scale';
 
 const styles = EStyleSheet.create({
-  $rem: rem,
 
   container: {
     width: '100%',

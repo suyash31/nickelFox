@@ -42,7 +42,31 @@ class ListRows extends Component {
   }
 
   render() {
-    const { name, description, action } = this.props;
+    const { name, description, action, component, selected } = this.props;
+    if (component === 'SelectSpecific') {
+      return (
+        <View>
+          <TouchableOpacity
+            onPress={action}
+            style={styles.rowContainer}
+          >
+            <View style={styles.listContainer}>
+              <Text style={styles.listTxtStyle}>{name}</Text>
+              <Text>{description}</Text>
+            </View>
+            <View style={styles.arrowContainer}>
+              {
+                name === selected ?
+                <Icon name="check" size={40} color="#90EE90" /> :
+                <Icon name="check" size={40} color="#E1E1E1" /> 
+              }
+              
+            </View> 
+          </TouchableOpacity>
+          <View style={styles.horizontalLine}/>
+        </View>
+      );
+    }
     return (
       <View>
         <TouchableOpacity

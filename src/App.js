@@ -23,6 +23,7 @@ import reducers from './reducers';
 import Home from './components/Home';
 import NewsFeed from './components/NewsFeed';
 import WebView from './components/WebView';
+import SelectSpecific from './components/SelectSpecific';
 
 
 
@@ -50,6 +51,11 @@ export default class App extends Component {
             <Scene
               key="webView"
               component={WebView}
+              hideNavBar
+            />
+            <Scene
+              key="selectSpecific"
+              component={SelectSpecific}
               hideNavBar
             />
           </Scene>

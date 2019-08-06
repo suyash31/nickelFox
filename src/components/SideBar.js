@@ -6,6 +6,8 @@ import {
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import ListRows from '../components/ListRows';
+import { Actions } from 'react-native-router-flux';
+import Application from '../app/config';
 
 const styles = EStyleSheet.create({
   sidebarContainer: {
@@ -32,9 +34,30 @@ const styles = EStyleSheet.create({
 export default class SideBar extends Component {
   constructor() {
     super()
+
+    this.state = {
+      language: '',
+      country: '',
+    }
+  }
+
+  componentDidMount = () => {
+    this.getLanguage()
+    this.getCountry();
+  }
+
+  getLanguage = () => {
+    Application.getLanguage()
+    .then(res => this.setState({ language: res }))
+  }
+
+  getCountry = () => {
+    Application.getCountry()
+    .then(res => this.setState({ country: res }))
   }
 
   render() {
+    const { language, country } = this.state;
     return(
       <View style={styles.sidebarContainer}>
         <View style={styles.profile}>
@@ -44,11 +67,13 @@ export default class SideBar extends Component {
         </View>
         <ListRows
           name = {'Language'}
-          description = {'English'}
+          description = {language}
+          action = {() => Actions.selectSpecific({screen: 'Language'})}
         />
         <ListRows
           name = {'Country'}
-          description = {'US'}
+          description = {`${country.charAt(0).toUpperCase()}${country.slice(1)}`}
+          action = {() => Actions.selectSpecific({screen: 'Country'})}
         />
       </View>
     )

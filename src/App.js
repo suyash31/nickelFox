@@ -43,12 +43,12 @@ export default class App extends Component {
               key="splash"
               component={Splash}
               hideNavBar
-              type={ActionConst.RESET}
             />
             <Scene
               key="home"
               component={Home}
               hideNavBar
+              type={ActionConst.RESET}
             />
             <Scene
               key="newsFeed"

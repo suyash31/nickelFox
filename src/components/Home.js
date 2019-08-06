@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { BackHandler } from 'react-native';
 import { Container, Tab, Tabs, ScrollableTab, Drawer } from 'native-base';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import SourceList from './SourceList';
 import Header from './Header';
 import SideBar from './SideBar';
+import { Actions } from 'react-native-router-flux';
 
 const styles = EStyleSheet.create({
   $red: '#cc0000',
@@ -28,6 +30,14 @@ const styles = EStyleSheet.create({
 export default class Home extends Component {
   constructor() {
     super();
+  }
+
+  componentDidMount = () => {
+    BackHandler.addEventListener('hardwareBackPress', this.backPress)
+  }
+
+  backPress = () => {
+    Actions.pop();
   }
 
   manageDrawer = (s) => {

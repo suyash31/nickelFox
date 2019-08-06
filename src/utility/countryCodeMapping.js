@@ -43,6 +43,8 @@ export default {
 	cu: "cuba",
 	us: "united states",
 	mx: "mexico",
+	my: "malaysia",
+	ng: "nigeria",
 	co: "colombia",
 	ve: "venezuela",
 	ar: "argentina",

@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from './Header';
 import Card from './Card';
 import * as API from '../api';
+import Loader from './Loader';
 
 const styles = EStyleSheet.create({
   outerContainer: {
@@ -54,6 +55,7 @@ export default class NewsFeed extends Component {
     super(props);
     this.state = {
       newsFeed: [],
+      loading: false,
     }
   }
 
@@ -62,11 +64,12 @@ export default class NewsFeed extends Component {
   }
 
   getNewsFeed = () => {
+    this.setState({ loading: true })
     const { id } = this.props;
     API.getNewsFeed(id)
     .then(res => {
       if (res.status == 'ok') {
-        this.setState({ newsFeed: res.articles})
+        this.setState({ newsFeed: res.articles, loading: false})
       }
     })
   }
@@ -86,7 +89,7 @@ export default class NewsFeed extends Component {
   }
 
   render() {
-    const { newsFeed } = this.state;
+    const { newsFeed, loading } = this.state;
     const { sourceName } = this.props;
     return (
       <View style={styles.outerContainer}>
@@ -97,13 +100,11 @@ export default class NewsFeed extends Component {
             <Icon name={'newspaper'} size={30} color={'#808080'} />
             <Text style={styles.name}>{sourceName}</Text>
           </View>
-          <View style={styles.newsFeedContainer}>
-            <FlatList
-              data={newsFeed}
-              renderItem={({item}) => this.renderCard({item})}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
+          <FlatList
+            data={newsFeed}
+            renderItem={({item}) => this.renderCard({item})}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
       </View>
     );

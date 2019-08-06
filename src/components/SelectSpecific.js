@@ -73,19 +73,20 @@ class SelectSpecific extends Component {
 
   handlePress = (screen) => {
     const { language, countryName } = this.state;
+    this.setState({ loading: true })
     if (screen === 'Language') {
       Application.setLanguage({language});
       langCode = Object.keys(languageCodeMapping).filter((key) => {
         return languageCodeMapping[key] == language
       })
-      this.setState({langCode: langCode[0]})
+      // this.setState({langCode: langCode[0]})
       this.props.saveLanguageCode(langCode[0]);
     } else {
       Application.setCountry({country: countryName });
       countryCode = Object.keys(countryCodeMapping).filter((key) => {
         return countryCodeMapping[key] == countryName
       })
-      this.setState({countryCode: countryCode[0]})
+      // this.setState({countryCode: countryCode[0]})
       this.props.saveCountryCode(countryCode[0]);
     }
     Actions.home();
@@ -118,6 +119,7 @@ class SelectSpecific extends Component {
   }
 
   render() {
+    const { loading } = this.state;
     const { screen } = this.props;
     return(
       <View>
@@ -136,7 +138,7 @@ class SelectSpecific extends Component {
             disabled = {false}
             onPress = {() => this.handlePress(screen)}
           >
-            <Text style={styles.saveStyle}>Save</Text>
+            <Text style={styles.saveStyle}>{loading ? 'Loading ...' : 'Save'}</Text>
           </Button>
         </View>
       </View>

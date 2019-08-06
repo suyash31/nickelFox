@@ -6,6 +6,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { WebView } from 'react-native-webview';
 
 import Header from './Header';
+import Loader from './Loader';
 
 const styles = EStyleSheet.create({
   outerContainer: {
@@ -20,6 +21,10 @@ export default class NewsFeed extends Component {
     }
   }
 
+  renderLoading = () => {
+    return <Loader/>
+  }
+
   render() {
     return (
       
@@ -28,6 +33,8 @@ export default class NewsFeed extends Component {
         <WebView
           source = {{ uri: this.props.url }}
           style = {{ flex: 1 }}
+          renderLoading={this.renderLoading}
+          startInLoadingState
         />
       </View>
     );

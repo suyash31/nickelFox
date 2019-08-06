@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   FlatList,
+  Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -10,14 +11,10 @@ import { Actions } from 'react-native-router-flux';
 import * as API from '../api';
 import * as actions from '../actions';
 import ListRows from './ListRows';
-import Application from '../app/config';
-import languageCodeMapping from '../utility/languageCodeMapping';
-import countryCodeMapping from '../utility/countryCodeMapping';
+import Loader from './Loader';
+import NoData from './NoData';
 
 const styles = EStyleSheet.create({
-  mainContainer: {
-    // padding: '1.5rem',
-  },
   cardContainer: {
     width: '100%',
     borderWidth: 0,
@@ -42,9 +39,6 @@ const styles = EStyleSheet.create({
   }
 })
 
-let langCode = [];
-let countryCode = [];
-
 class SourceList extends Component {
   constructor(props) {
     super(props);
@@ -52,17 +46,22 @@ class SourceList extends Component {
     this.state = {
       language: '',
       country: '',
+      loading: false,
     }
     this.getSources();
   }
 
   getSources = () => {
+    this.setState({ loading: true })
     const { category, saveSourceList, codes } = this.props;
     
     API.getSources(category, langCode = codes.langCode, countryCode = codes.countryCode)
     .then(res => {
       if (res.status == 'ok') {
         saveSourceList(category, res.sources)
+        this.setState({ loading: false })
+      } else {
+        alert('Something went wrong...')
       }
     })
   }
@@ -79,14 +78,23 @@ class SourceList extends Component {
   }
 
   render() {
+    const { loading } = this.state;
     const { category, sources } = this.props;
+
+    if (loading) {
+      return 
+    }
     return (
-      <View style={styles.mainContainer}>
-        <FlatList
-          data={sources[category]}
-          renderItem={({item}) => this.renderCard({item})}
-          keyExtractor={(item, index) => index.toString()}
-        />
+      <View>
+        {
+          loading ?
+          <Loader /> :
+          <FlatList
+            data={sources[category]}
+            renderItem={({item}) => this.renderCard({item})}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        }
       </View>
     );
   }

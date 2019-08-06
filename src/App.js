@@ -13,7 +13,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, ActionConst } from 'react-native-router-flux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -43,6 +43,7 @@ export default class App extends Component {
               key="splash"
               component={Splash}
               hideNavBar
+              type={ActionConst.RESET}
             />
             <Scene
               key="home"
